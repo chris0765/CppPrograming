@@ -14,7 +14,7 @@ int main()
     a = (ax-bx)*(ax-bx)+(ay-by)*(ay-by);
     b = (bx-cx)*(bx-cx)+(by-cy)*(by-cy);
     c = (cx-ax)*(cx-ax)+(cy-ay)*(cy-ay);
-    if(a<=b&&b<=c)
+    if((a<=b&&b<=c)||(b<=a&&a<=c))
     {
         if(a+b==c)
             cout<<1<<endl;

@@ -6,7 +6,9 @@ int main()
 {
     int a, b, c;
     cin>>a>>b>>c;
-    if(a==b&&b==c)
+    if(a+b<=c)
+        cout<<0<<endl;
+    else if(a==b&&b==c)
         cout<<1<<endl;
     else if(a*a+b*b==c*c)
         cout<<2<<endl;
