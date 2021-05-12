@@ -1,0 +1,37 @@
+001 : #include <iostream>
+002 : #include <fstream>
+003 : #include <iomanip>
+004 : 
+005 : using namespace std;
+006 : 
+007 : int main(){
+008 :     char text[30];
+009 :     ifstream fin;
+010 :     fin.open("./2-1.cpp");
+011 :     if(!fin){
+012 :         cout<<"읽기파일 인식 실패"<<endl;
+013 :         return 0;
+014 :     }
+015 :     ofstream fout("./2-1.txt");
+016 :     if(!fout){
+017 :         cout<<"쓰기파일 인식 실패"<<endl;
+018 :         return 0;
+019 :     }
+020 :     int check;
+021 :     int cnt=1;
+022 :     cout<<setw(3)<<setfill('0')<<cnt<<" : ";
+023 :     fout<<setw(3)<<setfill('0')<<cnt++<<" : ";
+024 :     while((check=fin.get()) != EOF){
+025 :         cout<<char(check);
+026 :         fout.put(char(check));
+027 :         if(char(check)=='\n'){
+028 :             cout<<setw(3)<<setfill('0')<<cnt<<" : ";
+029 :             fout<<setw(3)<<setfill('0')<<cnt++<<" : ";
+030 :         }
+031 :     }
+032 :     cout<<endl;
+033 :     fout<<endl;
+034 :     fin.close();
+035 :     fout.close();
+036 :     return 0;
+037 : }
