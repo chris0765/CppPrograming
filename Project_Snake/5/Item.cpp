@@ -10,10 +10,10 @@ void Item::makeItem(vector<vector<int>> Map, vector<Pos> BODY, chrono::time_poin
         mt19937 gen(rd());
         uniform_int_distribution<int> randrow(0, row-1);
         uniform_int_distribution<int> randcol(0, col-1);
-        uniform_int_distribution<int> randitem(0, 1);
+        uniform_int_distribution<int> randitem(0, 4);
         bool check = false;
         int torow=0, tocol=0;
-        int item_spec[2] = {5, 6};
+        int item_spec[5] = {5, 6, 5, 6, 5}; // Grow와 Poison의 생성 확률 비율을 3:2로 설정
 
         do{
             check = false;

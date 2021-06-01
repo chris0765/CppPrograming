@@ -12,16 +12,38 @@ bool Gate::makeGates(vector<vector<int>> map, int score, chrono::time_point<chro
         int torow = 0, tocol = 0;
 
         do{
-            check = false;
+            check = true;
             torow = randrow(gen);
             tocol = randcol(gen);
-        } while(map[torow][tocol] != 1); // 게이트가 벽 위에 생성되지 않았다면(Immune Wall 제외) 좌표 재생성
+            int d[4][2] = {{1, 0}, {0, -1}, {-1, 0}, {0, 1}};
+            for(int i=0; i<4; i++){
+                int nextx = torow + d[i][0];
+                int nexty = tocol + d[i][1];
+                if(nextx < 0 || row <= nextx || nexty < 0 || col <= nexty){
+                    continue;
+                }
+                if(map[nextx][nexty] != 1 && map[nextx][nexty] != 2){
+                    check = false;
+                }
+            }
+        } while(map[torow][tocol] != 1 || check); // 게이트가 벽 위에 생성되지 않았다면(Immune Wall 제외) 좌표 재생성, 게이트의 사방이 모두 막혀있다면 좌표 재생성
         gates.push_back({torow, tocol});
         do{
             check = false;
             torow = randrow(gen);
             tocol = randcol(gen);
-        } while(map[torow][tocol] != 1 || (torow == gates[0].getX() && tocol == gates[0].getY())); // 나머지 게이트쌍도 마찬가지로 생성. 다른 쌍과 좌표가 겹치지 않도록 한다.
+            int d[4][2] = {{1, 0}, {0, -1}, {-1, 0}, {0, 1}};
+            for(int i=0; i<4; i++){
+                int nextx = torow + d[i][0];
+                int nexty = tocol + d[i][1];
+                if(nextx < 0 || row <= nextx || nexty < 0 || col <= nexty){
+                    continue;
+                }
+                if(map[nextx][nexty] != 1 && map[nextx][nexty] != 2){
+                    check = false;
+                }
+            }
+        } while(map[torow][tocol] != 1 || (torow == gates[0].getX() && tocol == gates[0].getY()) || check); // 나머지 게이트쌍도 마찬가지로 생성. 다른 쌍과 좌표가 겹치지 않도록 한다.
         gates.push_back({torow, tocol});
         madetime = nowtime; // 게이트가 생성된 시각 저장
     }
