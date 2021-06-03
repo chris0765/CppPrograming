@@ -78,8 +78,11 @@ vector<Pos> Snake::getBODY(){
 
 void Snake::update(vector<vector<int>> totalMap, Pos tHead, char nextDir){
     // 머리의 다음 좌표가 게이트일 경우에 게이트 이동을 True로 변경
-    if(totalMap[nextHead().getX()][nextHead().getY()] == 7)
+    if(totalMap[nextHead().getX()][nextHead().getY()] == 7){
         isWarped = true;
+        warpedLen = 0;
+        warptime++;
+    }
     // 머리 이동과 진행방향 갱신
     BODY.insert(BODY.begin(), tHead);
     dir = nextDir;
@@ -98,8 +101,6 @@ void Snake::update(vector<vector<int>> totalMap, Pos tHead, char nextDir){
         isPoison = false;
     }
     if(isWarped){
-        if(warpedLen == 0)
-            warptime++;
         warpedLen++;
         growscore = 0;
         if(warpedLen >= BODY.size()){
